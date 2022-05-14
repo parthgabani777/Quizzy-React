@@ -1,0 +1,82 @@
+/* utility */
+.link-blue {
+    color: var(--blue-color);
+}
+.link-blue:hover {
+    opacity: 0.85;
+}
+
+/* login */
+.auth {
+    max-width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.auth-form {
+    width: 100%;
+    margin: 5rem 0;
+}
+.auth .input-group {
+    display: flex;
+    flex-direction: column;
+}
+.auth .input-group label {
+    padding-bottom: 0.5rem;
+}
+.auth .input-checkbox {
+    display: flex;
+    justify-content: space-between;
+}
+.auth-btn {
+    width: 100%;
+}
+.auth input[type="checkbox"] {
+    margin-right: 5px;
+}
+.auth input {
+    background-color: var(--border-color);
+    color: var(--white-color);
+    border: none;
+}
+
+.auth .password-input {
+    position: relative;
+}
+.auth .password-input input {
+    width: 100%;
+}
+.auth .password-input .fas {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.auth .password-input .fas:hover {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1200px) {
+    .auth {
+        max-width: 50%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .auth {
+        max-width: 70%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .auth {
+        max-width: 80%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .auth {
+        max-width: 90%;
+    }
+}
