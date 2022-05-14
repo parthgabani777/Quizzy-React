@@ -45,11 +45,11 @@ function Signup() {
                         <h3 className="text-l text-center py-1">Signup</h3>
 
                         <div className="input-group py-1">
-                            <label htmlFor="firstname">Firstname</label>
+                            <label htmlFor="firstname">First name</label>
                             <input
                                 type="text"
                                 className="input text-s"
-                                placeholder="firstname"
+                                placeholder="John"
                                 id="firstname"
                                 value={signupCredentials.firstname}
                                 onChange={signupCredentialsChangeHandler}
@@ -57,12 +57,12 @@ function Signup() {
                         </div>
 
                         <div className="input-group py-1">
-                            <label htmlFor="lastname">Lastname</label>
+                            <label htmlFor="lastname">Last name</label>
                             <input
                                 type="text"
                                 className="input text-s"
                                 id="lastname"
-                                placeholder="lastname"
+                                placeholder="Dave"
                                 value={signupCredentials.lastname}
                                 onChange={signupCredentialsChangeHandler}
                             />
@@ -74,7 +74,7 @@ function Signup() {
                                 type="text"
                                 className="input text-s"
                                 id="email"
-                                placeholder="mail@gmail.com"
+                                placeholder="john@gmail.com"
                                 value={signupCredentials.email}
                                 onChange={signupCredentialsChangeHandler}
                             />
