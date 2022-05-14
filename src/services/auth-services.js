@@ -15,7 +15,7 @@ const signup = async ({ email, password, firstname, lastname }) => {
     );
 
     const db = getFirestore();
-    await setDoc(doc(db, `Users/${user.id}`), {
+    await setDoc(doc(db, `Users/${user.uid}`), {
         firstname,
         lastname,
     });

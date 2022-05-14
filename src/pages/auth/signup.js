@@ -10,11 +10,11 @@ function Signup() {
     const { signupHandler } = useAuth();
 
     const defaultSignupCredentials = {
-        firstname: "temp",
-        lastname: "temp",
-        email: "gabaniparth17@gmail.com",
-        password: "parth123",
-        confirmPassword: "parth123",
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
     };
     const [signupCredentials, setSignupCredentials] = useState(
         defaultSignupCredentials
