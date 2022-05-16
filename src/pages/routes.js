@@ -1,6 +1,5 @@
-import { getAuth } from "firebase/auth";
 import { Routes, Route } from "react-router-dom";
-import { Home, Login, Signup } from "./index";
+import { Home, Login, Signup, Rules, Quizzes } from "./index";
 import RequiresAuth from "./RequiresAuth";
 
 function PageRoutes() {
@@ -9,6 +8,22 @@ function PageRoutes() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route
+                path="/quizzes/:categoryId"
+                element={
+                    <RequiresAuth>
+                        <Quizzes />
+                    </RequiresAuth>
+                }
+            />
+            <Route
+                path="/rules/:quizId"
+                element={
+                    <RequiresAuth>
+                        <Rules />
+                    </RequiresAuth>
+                }
+            />
         </Routes>
     );
 }
