@@ -19,6 +19,7 @@ header > * {
 header .auth-btn {
     border: 1px solid var(--blue-color);
     color: var(--blue-color);
+    background-color: var(--primary-color);
     border-radius: 4px;
     width: fit-content;
     margin-left: auto;

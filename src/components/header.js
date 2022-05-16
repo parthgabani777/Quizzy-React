@@ -15,9 +15,9 @@ function Header() {
                 <h2>Quizzy</h2>
             </Link>
             {currentUser ? (
-                <a className="btn auth-btn text-s" onClick={signout}>
+                <button className="btn auth-btn text-s" onClick={signout}>
                     Logout
-                </a>
+                </button>
             ) : (
                 <Link to="/login" className="btn auth-btn text-s">
                     Login
