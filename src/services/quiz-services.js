@@ -30,7 +30,7 @@ const getQuizzes = async (categoryId) => {
 const getQuiz = async (quizId) => {
     try {
         const db = getFirestore();
-        const quizRef = doc(db, "Quizzes", quizId);
+        const quizRef = doc(db, `Quizzes/${quizId}`);
         const quizDoc = await getDoc(quizRef);
 
         return quizDoc.exists() ? { ...quizDoc.data(), id: quizDoc.id } : null;
