@@ -1,0 +1,25 @@
+.result{
+      text-align: center;
+}
+.final-score{
+      font-size: 1.8rem;
+      font-weight: bold;
+}
+.result-title{
+      font-size: 2rem;
+      font-weight: bold;
+      padding-bottom: var(--spacing-xs);
+}
+
+.question-container{
+      padding-top: var(--spacing-s);
+}
+.question-container:not(:last-child){
+      border-bottom: 1px solid var(--text-color);
+}
+.question-header{
+      padding: 0;
+}
+.option{
+      margin: var(--spacing-xs) 0;
+}

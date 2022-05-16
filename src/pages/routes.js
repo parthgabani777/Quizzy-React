@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, Login, Signup, Rules, Quizzes } from "./index";
+import { Home, Login, Signup, Rules, Quizzes, Quiz, Result } from "./index";
 import RequiresAuth from "./RequiresAuth";
 
 function PageRoutes() {
@@ -21,6 +21,22 @@ function PageRoutes() {
                 element={
                     <RequiresAuth>
                         <Rules />
+                    </RequiresAuth>
+                }
+            />
+            <Route
+                path="/quiz/:quizId"
+                element={
+                    <RequiresAuth>
+                        <Quiz />
+                    </RequiresAuth>
+                }
+            />
+            <Route
+                path="/result"
+                element={
+                    <RequiresAuth>
+                        <Result />
                     </RequiresAuth>
                 }
             />

@@ -1,0 +1,22 @@
+.main{
+      text-align: center;
+}
+
+.quiz-title{
+      font-size: 2.5rem;
+      font-weight: bold;
+}
+
+.submit-btn{
+      background-color: var(--warning-color);
+      padding: 1.6rem;
+      border-radius: 2rem;
+      font-size: 1.6rem;
+}
+.submit-btn:hover{
+      cursor: pointer;
+      opacity: 0.85;
+}
+.question-footer{
+      padding-top: var(--spacing-s);
+}
