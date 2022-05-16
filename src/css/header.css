@@ -1,0 +1,27 @@
+header {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    align-items: center;
+}
+/* Header title */
+.main-title {
+    grid-column-start: 2;
+    text-align: center;
+    font-size: 2.5rem;
+    padding: var(--spacing-m);
+}
+
+header > * {
+    flex: 1;
+}
+
+header .auth-btn {
+    border: 1px solid var(--blue-color);
+    color: var(--blue-color);
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: 2rem;
+}
