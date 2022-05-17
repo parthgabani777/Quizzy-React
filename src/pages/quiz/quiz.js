@@ -86,7 +86,8 @@ function Quiz() {
                                 <span className="question-number-text">
                                     Question Index:{" "}
                                 </span>
-                                {answers.currentQuestionCounter}/5
+                                {answers.currentQuestionCounter}/
+                                {questions.length}
                             </p>
                             <p className="quiz-score">
                                 <span className="quiz-score-text">
@@ -100,12 +101,6 @@ function Quiz() {
                             question={questions[answers.currentQuestionCounter]}
                             nextQuestionHandler={nextQuestionHandler}
                         />
-
-                        {/* <div className="question-footer">
-                            <Link to="/result" className="submit-btn">
-                                End test
-                            </Link>
-                        </div> */}
                     </div>
                 </>
             ) : (
