@@ -10,10 +10,6 @@ const Result = () => {
     const { questions, answers } = state ?? {};
     const { currentScore, selectedAnswers } = answers ?? {};
 
-    useEffect(() => {
-        console.log(currentScore, selectedAnswers);
-    }, []);
-
     return (
         <section className="result">
             <div className="result-title">

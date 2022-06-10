@@ -8,6 +8,7 @@ import {
     getFirestore,
     setDoc,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const saveResult = async ({
     quizId,
@@ -24,7 +25,7 @@ const saveResult = async ({
         );
         await addDoc(userResultsRef, { quizId, quizTitle, score, totalScore });
     } catch (error) {
-        console.log(error);
+        toast.error("Can not save resutl");
     }
 };
 

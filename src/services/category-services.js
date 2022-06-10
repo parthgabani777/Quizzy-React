@@ -1,8 +1,5 @@
-import {
-    getFirestore,
-    getDocs,
-    collection,
-} from "firebase/firestore";
+import { getFirestore, getDocs, collection } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const getCategories = async () => {
     try {
@@ -14,7 +11,7 @@ const getCategories = async () => {
         );
         return categories;
     } catch (error) {
-        console.log(error);
+        toast.error("Can not get categories.");
     }
 };
 

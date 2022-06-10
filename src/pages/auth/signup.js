@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./auth.css";
 import { useLoader } from "../../context/loader-context";
 import { useAuth } from "../../context/auth-context";
+import { toast } from "react-toastify";
 
 function Signup() {
     const { loading, setLoading } = useLoader();
@@ -32,8 +33,9 @@ function Signup() {
     const signupClickHandler = async (e) => {
         e.preventDefault();
         setLoading(true);
-        signupCredentials.password === signupCredentials.confirmPassword &&
-            (await signupHandler(signupCredentials));
+        signupCredentials.password === signupCredentials.confirmPassword
+            ? await signupHandler(signupCredentials)
+            : toast.error("Password and Confirm password should be same");
         setLoading(false);
     };
 
