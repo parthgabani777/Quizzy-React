@@ -45,8 +45,8 @@ function Signup() {
             firstName: "john",
             lastName: "doe",
             email: "johndoe@email.com",
-            password: "johndoe@123",
-            confirmPassword: "johndoe@123",
+            password: "Johndoe@123",
+            confirmPassword: "Johndoe@123",
         });
     };
 
