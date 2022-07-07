@@ -10,8 +10,8 @@ function Login() {
     const { loading, setLoading } = useLoader();
 
     const defaultLoginCredentials = {
-        email: "gabaniparth04@gmail.com",
-        password: "parth123",
+        email: "",
+        password: "",
     };
     const [loginCredentials, setLoginCredentials] = useState(
         defaultLoginCredentials
@@ -26,17 +26,34 @@ function Login() {
         });
     };
 
-    const loginClickHandler = async (e) => {
-        e.preventDefault();
-        setLoading(true);
+    // const loginClickHandler = async (e) => {
+    //     e.preventDefault();
+    //     setLoading(true);
+    //     await loginHandler(loginCredentials);
+    //     setLoading(false);
+    // };
+
+    const login = async (loginCredentials) => {
         await loginHandler(loginCredentials);
-        setLoading(false);
+    };
+
+    const submitLoginCredentials = async (e) => {
+        e.preventDefault();
+        login(loginCredentials);
+    };
+
+    const guestLoginHandler = (e) => {
+        e.preventDefault();
+        login({
+            email: "gabaniparth04@gmail.com",
+            password: "parth123",
+        });
     };
 
     return (
         <section className="login bg-primary">
             {loading || (
-                <form className="auth text-s">
+                <form className="auth text-s" onSubmit={submitLoginCredentials}>
                     <div className="auth-form box-shadow p-4">
                         <h3 className="text-l text-center py-1">Login</h3>
 
@@ -49,6 +66,7 @@ function Login() {
                                 placeholder="mail@gmail.com"
                                 value={loginCredentials.email}
                                 onChange={loginCredentialsChangeHandler}
+                                required
                             />
                         </div>
 
@@ -63,6 +81,7 @@ function Login() {
                                     placeholder="************"
                                     value={loginCredentials.password}
                                     onChange={loginCredentialsChangeHandler}
+                                    required
                                 />
                                 <i
                                     className={`fas ${
@@ -75,20 +94,18 @@ function Login() {
                             </div>
                         </div>
 
-                        <div className="input-checkbox py-1">
-                            <div>
-                                <input type="checkbox" id="remember_me" />
-                                <label htmlFor="remember_me">Remember Me</label>
-                            </div>
-                            <a className="link-blue">Forget Password?</a>
+                        <div className="py-1 text-center">
+                            <button className="btn btn-light auth-btn br-1">
+                                Login
+                            </button>
                         </div>
 
                         <div className="py-1 text-center">
                             <button
                                 className="btn btn-light auth-btn br-1"
-                                onClick={loginClickHandler}
+                                onClick={guestLoginHandler}
                             >
-                                Login
+                                Login as guest
                             </button>
                         </div>
 

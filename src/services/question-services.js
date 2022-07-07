@@ -9,6 +9,7 @@ import {
     where,
     getDoc,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const getQuestions = async (quizId) => {
     try {
@@ -25,7 +26,7 @@ const getQuestions = async (quizId) => {
         });
         return { quiz, questions };
     } catch (error) {
-        console.log(error.code + error.message);
+        toast.error("Can not get questions");
     }
 };
 

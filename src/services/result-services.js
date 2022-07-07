@@ -1,13 +1,8 @@
 // get user result
 // post user result
 import { getAuth } from "firebase/auth";
-import {
-    addDoc,
-    collection,
-    doc,
-    getFirestore,
-    setDoc,
-} from "firebase/firestore";
+import { addDoc, collection, getFirestore } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const saveResult = async ({
     quizId,
@@ -23,8 +18,9 @@ const saveResult = async ({
             `Users/${currentUser.uid}/Results`
         );
         await addDoc(userResultsRef, { quizId, quizTitle, score, totalScore });
+        toast.success("Result saved");
     } catch (error) {
-        console.log(error);
+        toast.error("Can not save result");
     }
 };
 

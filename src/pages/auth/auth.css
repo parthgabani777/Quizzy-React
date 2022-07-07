@@ -1,6 +1,7 @@
 /* utility */
 .link-blue {
     color: var(--blue-color);
+    border-bottom: 1px solid var(--blue-color);
 }
 .link-blue:hover {
     opacity: 0.85;
@@ -8,7 +9,7 @@
 
 /* login */
 .auth {
-    max-width: 45%;
+    max-width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -2,6 +2,7 @@ import { getAuth, signOut } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { login, signup, signout } from "../services/auth-services";
+import { toast } from "react-toastify";
 
 const initialValue = false;
 
@@ -19,7 +20,7 @@ const AuthProvider = ({ children }) => {
             const userData = await login(loginCredentials);
             navigation(from);
         } catch (error) {
-            console.log(error);
+            toast.error("Check email and password.");
         }
     };
 
@@ -29,6 +30,7 @@ const AuthProvider = ({ children }) => {
             navigation("/");
         } catch (error) {
             console.log(error);
+            toast.error("Can not signup");
         }
     };
 
@@ -36,7 +38,7 @@ const AuthProvider = ({ children }) => {
         try {
             signout();
         } catch (error) {
-            console.log(error);
+            toast.error("Can not signout");
         }
     };
 

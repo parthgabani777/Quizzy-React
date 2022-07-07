@@ -7,6 +7,7 @@ import {
     where,
     getDoc,
 } from "firebase/firestore";
+import { toast } from "react-toastify";
 
 const getQuizzes = async (categoryId) => {
     try {
@@ -23,7 +24,7 @@ const getQuizzes = async (categoryId) => {
         );
         return quizzes;
     } catch (error) {
-        console.log(error.code + error.message);
+        toast.error("Can not get quizzes.");
     }
 };
 
@@ -35,7 +36,7 @@ const getQuiz = async (quizId) => {
 
         return quizDoc.exists() ? { ...quizDoc.data(), id: quizDoc.id } : null;
     } catch (error) {
-        console.log(error.code + error.message);
+        toast.error("Can not get quiz data.");
     }
 };
 

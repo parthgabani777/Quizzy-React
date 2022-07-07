@@ -5,8 +5,9 @@ import {
     signOut,
 } from "firebase/auth";
 import { doc, getFirestore, setDoc, getDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
 
-const signup = async ({ email, password, firstname, lastname }) => {
+const signup = async ({ email, password, firstName, lastName }) => {
     const auth = getAuth();
     const { user } = await createUserWithEmailAndPassword(
         auth,
@@ -16,8 +17,8 @@ const signup = async ({ email, password, firstname, lastname }) => {
 
     const db = getFirestore();
     await setDoc(doc(db, `Users/${user.uid}`), {
-        firstname,
-        lastname,
+        firstName,
+        lastName,
     });
 };
 
@@ -47,7 +48,7 @@ const getUserData = async () => {
         const db = getFirestore();
         const userData = await getDoc(doc(db, `Users/${uid}`));
     } catch (error) {
-        console.log(error);
+        toast.error("Can get user data");
     }
 };
 
