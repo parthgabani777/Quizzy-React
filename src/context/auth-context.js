@@ -29,6 +29,7 @@ const AuthProvider = ({ children }) => {
             const userData = await signup(signupCredentials);
             navigation("/");
         } catch (error) {
+            console.log(error);
             toast.error("Can not signup");
         }
     };

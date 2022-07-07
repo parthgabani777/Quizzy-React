@@ -7,7 +7,7 @@ import {
 import { doc, getFirestore, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 
-const signup = async ({ email, password, firstname, lastname }) => {
+const signup = async ({ email, password, firstName, lastName }) => {
     const auth = getAuth();
     const { user } = await createUserWithEmailAndPassword(
         auth,
@@ -17,8 +17,8 @@ const signup = async ({ email, password, firstname, lastname }) => {
 
     const db = getFirestore();
     await setDoc(doc(db, `Users/${user.uid}`), {
-        firstname,
-        lastname,
+        firstName,
+        lastName,
     });
 };
 

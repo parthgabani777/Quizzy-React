@@ -11,8 +11,8 @@ function Signup() {
     const { signupHandler } = useAuth();
 
     const defaultSignupCredentials = {
-        firstname: "",
-        lastname: "",
+        firstName: "",
+        lastName: "",
         email: "",
         password: "",
         confirmPassword: "",
@@ -39,34 +39,60 @@ function Signup() {
         setLoading(false);
     };
 
+    const guestSignupHandler = (e) => {
+        e.preventDefault();
+        setSignupCredentials({
+            firstName: "john",
+            lastName: "doe",
+            email: "johndoe@email.com",
+            password: "johndoe@123",
+            confirmPassword: "johndoe@123",
+        });
+    };
+
+    const passwordValidationMsg = (e) => {
+        if (e.target.value === "") {
+            e.target.setCustomValidity("Enter password");
+        } else if (e.target.validity.patternMismatch) {
+            e.target.setCustomValidity(
+                "Password should have minimum eight characters, at least one uppercase and lowercase letter and one number."
+            );
+        } else {
+            e.target.setCustomValidity("");
+        }
+        return true;
+    };
+
     return (
         <section className="signup bg-primary">
             {loading || (
-                <form className="auth text-s">
+                <form className="auth text-s" onSubmit={signupClickHandler}>
                     <div className="auth-form box-shadow p-4">
                         <h3 className="text-l text-center py-1">Signup</h3>
 
                         <div className="input-group py-1">
-                            <label htmlFor="firstname">First name</label>
+                            <label htmlFor="firstName">First name</label>
                             <input
                                 type="text"
                                 className="input text-s"
                                 placeholder="John"
-                                id="firstname"
-                                value={signupCredentials.firstname}
+                                id="firstName"
+                                value={signupCredentials.firstName}
                                 onChange={signupCredentialsChangeHandler}
+                                required
                             />
                         </div>
 
                         <div className="input-group py-1">
-                            <label htmlFor="lastname">Last name</label>
+                            <label htmlFor="lastName">Last name</label>
                             <input
                                 type="text"
                                 className="input text-s"
-                                id="lastname"
+                                id="lastName"
                                 placeholder="Dave"
-                                value={signupCredentials.lastname}
+                                value={signupCredentials.lastName}
                                 onChange={signupCredentialsChangeHandler}
+                                required
                             />
                         </div>
 
@@ -79,6 +105,8 @@ function Signup() {
                                 placeholder="john@gmail.com"
                                 value={signupCredentials.email}
                                 onChange={signupCredentialsChangeHandler}
+                                required
+                                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                             />
                         </div>
 
@@ -92,6 +120,9 @@ function Signup() {
                                     placeholder="************"
                                     value={signupCredentials.password}
                                     onChange={signupCredentialsChangeHandler}
+                                    required
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    onInvalid={passwordValidationMsg}
                                 />
                                 <i
                                     className={`fas ${
@@ -106,7 +137,7 @@ function Signup() {
 
                         <div className="input-group py-1">
                             <label htmlFor="confirm-password">
-                                Confitm Password
+                                Confirm Password
                             </label>
                             <div className="password-input">
                                 <input
@@ -121,6 +152,7 @@ function Signup() {
                                             confirmPassword: e.target.value,
                                         });
                                     }}
+                                    required
                                 />
                                 <i
                                     className={`fas ${
@@ -133,21 +165,18 @@ function Signup() {
                             </div>
                         </div>
 
-                        <div className="input-checkbox py-1">
-                            <div>
-                                <input type="checkbox" id="tc" />
-                                <label htmlFor="tc">
-                                    I accept all terms and conditions
-                                </label>
-                            </div>
+                        <div className="py-1 text-center">
+                            <button className="btn btn-light auth-btn br-1">
+                                Create an Account
+                            </button>
                         </div>
 
                         <div className="py-1 text-center">
                             <button
                                 className="btn btn-light auth-btn br-1"
-                                onClick={signupClickHandler}
+                                onClick={guestSignupHandler}
                             >
-                                Create an Account
+                                Fill guest details
                             </button>
                         </div>
 
