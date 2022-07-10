@@ -11,6 +11,7 @@ const authContext = createContext();
 const AuthProvider = ({ children }) => {
     const auth = getAuth();
     const [currentUser, setCurrentUser] = useState(initialValue);
+    const [loading, setLoading] = useState(true);
     const navigation = useNavigate();
     const location = useLocation();
     const from = location.state?.from || "/";
@@ -30,7 +31,7 @@ const AuthProvider = ({ children }) => {
             navigation("/");
         } catch (error) {
             console.log(error);
-            toast.error("Can not signup");
+            toast.error("Can not sign up");
         }
     };
 
@@ -38,7 +39,7 @@ const AuthProvider = ({ children }) => {
         try {
             signout();
         } catch (error) {
-            toast.error("Can not signout");
+            toast.error("Can not sign out");
         }
     };
 
@@ -51,13 +52,17 @@ const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        auth.onAuthStateChanged((user) => {
+        const unsubsrcibe = auth.onAuthStateChanged((user) => {
             setCurrentUser(user);
+            setLoading(false);
         });
+        return unsubsrcibe;
     }, []);
 
     return (
-        <authContext.Provider value={value}>{children}</authContext.Provider>
+        <authContext.Provider value={value}>
+            {!loading && children}
+        </authContext.Provider>
     );
 };
 

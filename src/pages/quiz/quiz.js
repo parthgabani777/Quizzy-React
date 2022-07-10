@@ -50,7 +50,7 @@ function Quiz() {
               };
     };
 
-    const EndQuiz = async (updatedAnswer) => {
+    const endQuiz = async (updatedAnswer) => {
         setLoading(true);
         await saveResult({
             quizId: quizId,
@@ -71,7 +71,7 @@ function Quiz() {
             return setAnswers(updatedAnswer);
         }
 
-        EndQuiz(updatedAnswer);
+        endQuiz(updatedAnswer);
     };
 
     return (
@@ -86,13 +86,11 @@ function Quiz() {
                                 <span className="question-number-text">
                                     Question Index:{" "}
                                 </span>
-                                {answers.currentQuestionCounter}/
+                                {answers.currentQuestionCounter + 1}/
                                 {questions.length}
                             </p>
                             <p className="quiz-score">
-                                <span className="quiz-score-text">
-                                    Scrore:{" "}
-                                </span>
+                                <span className="quiz-score-text">Score: </span>
                                 {answers.currentScore}
                             </p>
                         </div>

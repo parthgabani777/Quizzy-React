@@ -26,15 +26,10 @@ function Login() {
         });
     };
 
-    // const loginClickHandler = async (e) => {
-    //     e.preventDefault();
-    //     setLoading(true);
-    //     await loginHandler(loginCredentials);
-    //     setLoading(false);
-    // };
-
     const login = async (loginCredentials) => {
+        setLoading(true);
         await loginHandler(loginCredentials);
+        setLoading(false);
     };
 
     const submitLoginCredentials = async (e) => {
