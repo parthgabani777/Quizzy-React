@@ -1,3 +1,4 @@
+import * as React from "react";
 import "./App.css";
 import "./css/design.css";
 import { PageRoutes } from "./pages/routes";

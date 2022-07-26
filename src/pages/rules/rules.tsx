@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useLoader } from "../../context/loader-context";
 import { getQuiz } from "../../services/quiz-services";
@@ -6,9 +6,9 @@ import "./rules.css";
 
 function Rules() {
     const { quizId } = useParams();
-    const { loading, setLoading } = useLoader();
+    const { loading, setLoading }: any = useLoader();
     const [quiz, setQuiz] = useState();
-    const { id, title, totalQuestions, totalTime } = quiz || {};
+    const { id, title, totalQuestions, totalTime }: any = quiz || {};
 
     useEffect(() => {
         const getQuizData = async () => {
@@ -29,11 +29,11 @@ function Rules() {
                     <div className="rule-title">Rules: -</div>
                     <div className="rule-list">
                         <p>
-                            <span>1.</span> Quiz containes {totalQuestions}{" "}
+                            <span>1.</span> Quiz contains {totalQuestions}{" "}
                             questions.
                         </p>
                         <p>
-                            <span>2.</span> Compelete quiz in {totalTime}{" "}
+                            <span>2.</span> Complete quiz in {totalTime}{" "}
                             minutes.
                         </p>
                         <p>

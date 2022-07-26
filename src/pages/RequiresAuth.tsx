@@ -1,11 +1,10 @@
-import { getAuth } from "firebase/auth";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Navigate, useLocation } from "react-router";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/auth-context";
 
-const RequiresAuth = ({ children }) => {
-    const { currentUser } = useAuth();
+const RequiresAuth = ({ children }: any) => {
+    const { currentUser }: any = useAuth();
     const location = useLocation();
 
     useEffect(() => {

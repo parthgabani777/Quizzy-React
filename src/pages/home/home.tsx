@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
 import { getCategories } from "../../services/category-services";
 import { useLoader } from "../../context/loader-context";
 
 function Home() {
-    const [categories, setCategories] = useState([]);
-    const { setLoading } = useLoader();
+    const [categories, setCategories] = useState<any[]>([]);
+    const { setLoading }: any = useLoader();
 
     useEffect(() => {
         const getData = async () => {

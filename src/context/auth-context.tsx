@@ -1,33 +1,33 @@
-import { getAuth, signOut } from "firebase/auth";
-import { createContext, useContext, useEffect, useState } from "react";
+import { getAuth } from "firebase/auth";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { login, signup, signout } from "../services/auth-services";
 import { toast } from "react-toastify";
 
 const initialValue = false;
 
-const authContext = createContext();
+const authContext = createContext(initialValue);
 
-const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }: any) => {
     const auth = getAuth();
     const [currentUser, setCurrentUser] = useState(initialValue);
     const [loading, setLoading] = useState(true);
     const navigation = useNavigate();
-    const location = useLocation();
+    const location: any = useLocation();
     const from = location.state?.from || "/";
 
-    const loginHandler = async (loginCredentials) => {
+    const loginHandler = async (loginCredentials: any) => {
         try {
-            const userData = await login(loginCredentials);
+            await login(loginCredentials);
             navigation(from);
         } catch (error) {
             toast.error("Check email and password.");
         }
     };
 
-    const signupHandler = async (signupCredentials) => {
+    const signupHandler = async (signupCredentials: any) => {
         try {
-            const userData = await signup(signupCredentials);
+            await signup(signupCredentials);
             navigation("/");
         } catch (error) {
             console.log(error);
@@ -43,7 +43,7 @@ const AuthProvider = ({ children }) => {
         }
     };
 
-    const value = {
+    const value: any = {
         currentUser,
         setCurrentUser,
         loginHandler,
@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        const unsubsrcibe = auth.onAuthStateChanged((user) => {
+        const unsubsrcibe = auth.onAuthStateChanged((user: any) => {
             setCurrentUser(user);
             setLoading(false);
         });

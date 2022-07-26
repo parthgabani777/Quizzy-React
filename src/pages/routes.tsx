@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import React, { Routes, Route } from "react-router-dom";
 import { Home, Login, Signup, Rules, Quizzes, Quiz, Result } from "./index";
 import RequiresAuth from "./RequiresAuth";
 

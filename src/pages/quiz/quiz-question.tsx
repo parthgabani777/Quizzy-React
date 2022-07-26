@@ -1,4 +1,6 @@
-function QuizQuestion({ question, nextQuestionHandler }) {
+import React from "react";
+
+function QuizQuestion({ question, nextQuestionHandler }: any) {
     const { question: questionText, Options } = question;
     return (
         <>
@@ -8,7 +10,7 @@ function QuizQuestion({ question, nextQuestionHandler }) {
             </div>
 
             <div className="options-group">
-                {Options.map((option, optionIndex) => {
+                {Options.map((option : any, optionIndex: any) => {
                     return (
                         <p
                             className="option"

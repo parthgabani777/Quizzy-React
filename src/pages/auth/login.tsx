@@ -1,13 +1,13 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./auth.css";
 import { useAuth } from "../../context/auth-context";
 import { useLoader } from "../../context/loader-context";
 
 function Login() {
-    const { loginHandler } = useAuth();
+    const { loginHandler }: any = useAuth();
 
-    const { loading, setLoading } = useLoader();
+    const { loading, setLoading }: any = useLoader();
 
     const defaultLoginCredentials = {
         email: "",
@@ -19,25 +19,25 @@ function Login() {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const loginCredentialsChangeHandler = (e) => {
+    const loginCredentialsChangeHandler = (e: any) => {
         setLoginCredentials({
             ...loginCredentials,
             [e.target.id]: e.target.value,
         });
     };
 
-    const login = async (loginCredentials) => {
+    const login = async (loginCredentials: any) => {
         setLoading(true);
         await loginHandler(loginCredentials);
         setLoading(false);
     };
 
-    const submitLoginCredentials = async (e) => {
+    const submitLoginCredentials = async (e: any) => {
         e.preventDefault();
         login(loginCredentials);
     };
 
-    const guestLoginHandler = (e) => {
+    const guestLoginHandler = (e: any) => {
         e.preventDefault();
         login({
             email: "gabaniparth04@gmail.com",

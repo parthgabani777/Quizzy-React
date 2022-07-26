@@ -9,13 +9,13 @@ const saveResult = async ({
     quizTitle = "temp",
     score,
     totalScore,
-}) => {
+}: any) => {
     const { currentUser } = getAuth();
     const db = getFirestore();
     try {
         const userResultsRef = collection(
             db,
-            `Users/${currentUser.uid}/Results`
+            `Users/${currentUser?.uid}/Results`
         );
         await addDoc(userResultsRef, { quizId, quizTitle, score, totalScore });
         toast.success("Result saved");

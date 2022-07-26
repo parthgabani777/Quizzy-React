@@ -1,4 +1,6 @@
-function ResultQuestion({ state, index }) {
+import React from "react";
+
+function ResultQuestion({ state, index }: any) {
     const { questions, answers } = state ?? {};
     const { selectedAnswers } = answers ?? {};
 
@@ -20,8 +22,8 @@ function ResultQuestion({ state, index }) {
             </div>
 
             <div className="options-group">
-                {Options.map((option, optionIndex) => {
-                    let classname = "";
+                {Options.map((option: any, optionIndex: any) => {
+                    let classname: any = "";
 
                     classname = optionIndex == answer && "correct";
 

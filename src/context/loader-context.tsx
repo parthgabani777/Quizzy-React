@@ -1,19 +1,21 @@
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-const LoaderContext = createContext();
+const LoaderContext = createContext(false);
 
-const LoaderProvider = ({ children }) => {
+const LoaderProvider = ({ children }: any) => {
     const [loading, setLoading] = useState(false);
 
-    const loaderStyle = {
+    const loaderStyle: any = {
         position: "absolute",
         top: "50%",
         left: "50%",
     };
 
+    const value: any = { loading, setLoading };
+
     return (
-        <LoaderContext.Provider value={{ loading, setLoading }}>
+        <LoaderContext.Provider value={value}>
             <ClipLoader
                 loading={loading}
                 css={loaderStyle}

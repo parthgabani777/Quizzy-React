@@ -1,7 +1,7 @@
 import "./quiz.css";
 import "../../css/questions.css";
-import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router";
 import { useLoader } from "../../context/loader-context";
 import { getQuestions } from "../../services/question-services";
 import { saveResult } from "../../services/result-services";
@@ -9,11 +9,11 @@ import { QuizQuestion } from "./quiz-question";
 
 function Quiz() {
     const { quizId } = useParams();
-    const { loading, setLoading } = useLoader();
-    const [questions, setQuestions] = useState([]);
-    const [quiz, setQuiz] = useState();
+    const { loading, setLoading }: any = useLoader();
+    const [questions, setQuestions] = useState<any[]>([]);
+    const [quiz, setQuiz] = useState<any>();
 
-    const [answers, setAnswers] = useState({
+    const [answers, setAnswers] = useState<any>({
         currentQuestionCounter: 0,
         currentScore: 0,
         selectedAnswers: [],
@@ -24,7 +24,7 @@ function Quiz() {
     useEffect(() => {
         const getQuestionsData = async () => {
             setLoading(true);
-            const { quiz, questions } = await getQuestions(quizId);
+            const { quiz, questions }: any = await getQuestions(quizId);
             setLoading(false);
             setQuiz(quiz);
             setQuestions(questions);
@@ -33,7 +33,7 @@ function Quiz() {
         getQuestionsData();
     }, []);
 
-    const getUpdatedAnswer = (selectedAnswer) => {
+    const getUpdatedAnswer = (selectedAnswer: any) => {
         const correctAnswer = questions[answers.currentQuestionCounter].answer;
 
         return selectedAnswer === correctAnswer
@@ -50,13 +50,13 @@ function Quiz() {
               };
     };
 
-    const endQuiz = async (updatedAnswer) => {
+    const endQuiz = async (updatedAnswer: any) => {
         setLoading(true);
         await saveResult({
             quizId: quizId,
-            quizTitle: quiz.title,
+            quizTitle: quiz?.title,
             score: answers.currentScore,
-            totalScore: quiz.totalQuestions,
+            totalScore: quiz?.totalQuestions,
         });
         setLoading(false);
         navigation("/result", {
@@ -64,7 +64,7 @@ function Quiz() {
         });
     };
 
-    const nextQuestionHandler = async (selectedAnswer) => {
+    const nextQuestionHandler = async (selectedAnswer: any) => {
         const updatedAnswer = getUpdatedAnswer(selectedAnswer);
 
         if (answers.currentQuestionCounter < questions.length - 1) {
@@ -78,7 +78,7 @@ function Quiz() {
         <section className="main">
             {questions.length > 0 && !loading ? (
                 <>
-                    <div className="quiz-title">{quiz.title}</div>
+                    <div className="quiz-title">{quiz?.title}</div>
 
                     <div className="question-container">
                         <div className="question-header">

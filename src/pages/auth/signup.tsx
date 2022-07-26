@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./auth.css";
 import { useLoader } from "../../context/loader-context";
@@ -6,9 +6,9 @@ import { useAuth } from "../../context/auth-context";
 import { toast } from "react-toastify";
 
 function Signup() {
-    const { loading, setLoading } = useLoader();
+    const { loading, setLoading }: any = useLoader();
 
-    const { signupHandler } = useAuth();
+    const { signupHandler }: any = useAuth();
 
     const defaultSignupCredentials = {
         firstName: "",
@@ -23,14 +23,14 @@ function Signup() {
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const signupCredentialsChangeHandler = (e) => {
+    const signupCredentialsChangeHandler = (e: any) => {
         setSignupCredentials({
             ...signupCredentials,
             [e.target.id]: e.target.value,
         });
     };
 
-    const signupClickHandler = async (e) => {
+    const signupClickHandler = async (e: any) => {
         e.preventDefault();
         setLoading(true);
         signupCredentials.password === signupCredentials.confirmPassword
@@ -39,7 +39,7 @@ function Signup() {
         setLoading(false);
     };
 
-    const guestSignupHandler = (e) => {
+    const guestSignupHandler = (e: any) => {
         e.preventDefault();
         setSignupCredentials({
             firstName: "john",
@@ -50,7 +50,7 @@ function Signup() {
         });
     };
 
-    const passwordValidationMsg = (e) => {
+    const passwordValidationMsg = (e: any) => {
         if (e.target.value === "") {
             e.target.setCustomValidity("Enter password");
         } else if (e.target.validity.patternMismatch) {

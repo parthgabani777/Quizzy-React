@@ -1,9 +1,10 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import "../css/header.css";
 
 function Header() {
-    const { currentUser, signoutHandler } = useAuth();
+    const { currentUser, signoutHandler }: any = useAuth();
 
     const signout = async () => {
         await signoutHandler();

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "./quizzes.css";
@@ -8,7 +8,7 @@ import { useLoader } from "../../context/loader-context";
 function Quizzes() {
     const [quizzes, setQuizzes] = useState([]);
     const { categoryId } = useParams();
-    const { loading, setLoading } = useLoader();
+    const { loading, setLoading }: any = useLoader();
 
     useEffect(() => {
         const getData = async () => {
