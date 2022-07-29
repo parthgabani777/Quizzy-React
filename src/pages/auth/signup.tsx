@@ -1,36 +1,38 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import "./auth.css";
 import { useLoader } from "../../context/loader-context";
 import { useAuth } from "../../context/auth-context";
 import { toast } from "react-toastify";
+import { SignupCredentialsType } from "types/auth.types";
 
 function Signup() {
     const { loading, setLoading }: any = useLoader();
 
     const { signupHandler }: any = useAuth();
 
-    const defaultSignupCredentials = {
+    const defaultSignupCredentials: SignupCredentialsType = {
         firstName: "",
         lastName: "",
         email: "",
         password: "",
         confirmPassword: "",
     };
-    const [signupCredentials, setSignupCredentials] = useState(
-        defaultSignupCredentials
-    );
+    const [signupCredentials, setSignupCredentials] =
+        useState<SignupCredentialsType>(defaultSignupCredentials);
 
-    const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    const signupCredentialsChangeHandler = (e: any) => {
+    const signupCredentialsChangeHandler = (
+        e: ChangeEvent<HTMLInputElement>
+    ) => {
         setSignupCredentials({
             ...signupCredentials,
             [e.target.id]: e.target.value,
         });
     };
 
-    const signupClickHandler = async (e: any) => {
+    const signupSubmitHandler = async (e: FormEvent) => {
         e.preventDefault();
         setLoading(true);
         signupCredentials.password === signupCredentials.confirmPassword
@@ -39,7 +41,7 @@ function Signup() {
         setLoading(false);
     };
 
-    const guestSignupHandler = (e: any) => {
+    const guestSignupHandler = (e: FormEvent) => {
         e.preventDefault();
         setSignupCredentials({
             firstName: "john",
@@ -50,7 +52,7 @@ function Signup() {
         });
     };
 
-    const passwordValidationMsg = (e: any) => {
+    const passwordValidationMsg = (e: InvalidEvent<HTMLInputElement>) => {
         if (e.target.value === "") {
             e.target.setCustomValidity("Enter password");
         } else if (e.target.validity.patternMismatch) {
@@ -66,7 +68,7 @@ function Signup() {
     return (
         <section className="signup bg-primary">
             {loading || (
-                <form className="auth text-s" onSubmit={signupClickHandler}>
+                <form className="auth text-s" onSubmit={signupSubmitHandler}>
                     <div className="auth-form box-shadow p-4">
                         <h3 className="text-l text-center py-1">Signup</h3>
 

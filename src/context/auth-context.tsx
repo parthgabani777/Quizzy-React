@@ -3,20 +3,29 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { login, signup, signout } from "../services/auth-services";
 import { toast } from "react-toastify";
+import { LoginCredentialsType, SignupCredentialsType } from "types/auth.types";
 
 const initialValue = false;
 
 const authContext = createContext(initialValue);
 
 const AuthProvider = ({ children }: any) => {
-    const auth = getAuth();
     const [currentUser, setCurrentUser] = useState(initialValue);
     const [loading, setLoading] = useState(true);
     const navigation = useNavigate();
     const location: any = useLocation();
     const from = location.state?.from || "/";
 
-    const loginHandler = async (loginCredentials: any) => {
+    useEffect(() => {
+        const auth = getAuth();
+        const unsubsrcibe = auth.onAuthStateChanged((user: any) => {
+            setCurrentUser(user);
+            setLoading(false);
+        });
+        return unsubsrcibe;
+    }, []);
+
+    const loginHandler = async (loginCredentials: LoginCredentialsType) => {
         try {
             await login(loginCredentials);
             navigation(from);
@@ -25,7 +34,7 @@ const AuthProvider = ({ children }: any) => {
         }
     };
 
-    const signupHandler = async (signupCredentials: any) => {
+    const signupHandler = async (signupCredentials: SignupCredentialsType) => {
         try {
             await signup(signupCredentials);
             navigation("/");
@@ -50,14 +59,6 @@ const AuthProvider = ({ children }: any) => {
         signupHandler,
         signoutHandler,
     };
-
-    useEffect(() => {
-        const unsubsrcibe = auth.onAuthStateChanged((user: any) => {
-            setCurrentUser(user);
-            setLoading(false);
-        });
-        return unsubsrcibe;
-    }, []);
 
     return (
         <authContext.Provider value={value}>

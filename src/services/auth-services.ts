@@ -6,13 +6,14 @@ import {
 } from "firebase/auth";
 import { doc, getFirestore, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { LoginCredentialsType, SignupCredentialsType } from "types/auth.types";
 
 const signup = async ({
     email,
     password,
     firstName,
     lastName,
-}: any): Promise<any> => {
+}: SignupCredentialsType) => {
     const auth = getAuth();
     const { user } = await createUserWithEmailAndPassword(
         auth,
@@ -27,7 +28,7 @@ const signup = async ({
     });
 };
 
-const login = async ({ email, password }: any): Promise<any> => {
+const login = async ({ email, password }: LoginCredentialsType) => {
     const auth = getAuth();
     const userCredential = await signInWithEmailAndPassword(
         auth,
@@ -42,7 +43,7 @@ const signout = async () => {
     await signOut(auth);
 };
 
-const getUserData = async () : Promise<any> => {
+const getUserData = async (): Promise<any> => {
     try {
         const { currentUser } = getAuth();
         if (!currentUser) {

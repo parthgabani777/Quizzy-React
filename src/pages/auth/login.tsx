@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import "./auth.css";
 import { useAuth } from "../../context/auth-context";
 import { useLoader } from "../../context/loader-context";
+import { LoginCredentialsType } from "types/auth.types";
 
 function Login() {
     const { loginHandler }: any = useAuth();
@@ -13,31 +14,32 @@ function Login() {
         email: "",
         password: "",
     };
-    const [loginCredentials, setLoginCredentials] = useState(
-        defaultLoginCredentials
-    );
+    const [loginCredentials, setLoginCredentials] =
+        useState<LoginCredentialsType>(defaultLoginCredentials);
 
     const [showPassword, setShowPassword] = useState(false);
 
-    const loginCredentialsChangeHandler = (e: any) => {
+    const loginCredentialsChangeHandler = (
+        e: ChangeEvent<HTMLInputElement>
+    ) => {
         setLoginCredentials({
             ...loginCredentials,
             [e.target.id]: e.target.value,
         });
     };
 
-    const login = async (loginCredentials: any) => {
+    const login = async (loginCredentials: LoginCredentialsType) => {
         setLoading(true);
         await loginHandler(loginCredentials);
         setLoading(false);
     };
 
-    const submitLoginCredentials = async (e: any) => {
+    const submitLoginCredentials = async (e: FormEvent) => {
         e.preventDefault();
         login(loginCredentials);
     };
 
-    const guestLoginHandler = (e: any) => {
+    const guestLoginHandler = (e: FormEvent) => {
         e.preventDefault();
         login({
             email: "gabaniparth04@gmail.com",

@@ -18,7 +18,7 @@ function Quizzes() {
             setQuizzes(quizzes);
         };
         getData();
-    }, []);
+    }, [categoryId, setLoading]);
 
     return (
         <>
@@ -30,7 +30,7 @@ function Quizzes() {
                           <Link to={`/rules/${id}`} className="card" key={id}>
                               <img
                                   src={imageUrl}
-                                  alt="Image 1"
+                                  alt={title}
                                   className="card-img"
                               />
                               <div className="card-content">

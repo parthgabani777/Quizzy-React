@@ -19,7 +19,7 @@ function Rules() {
         };
 
         getQuizData();
-    }, []);
+    }, [quizId, setLoading]);
 
     return (
         <div className="rule">
