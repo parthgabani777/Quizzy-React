@@ -1,24 +1,32 @@
-import { getAuth } from "firebase/auth";
+import { getAuth, User } from "firebase/auth";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { login, signup, signout } from "../services/auth-services";
 import { toast } from "react-toastify";
 import { LoginCredentialsType, SignupCredentialsType } from "types/auth.types";
+import { authContextType } from "../types/auth.context.types";
 
-const initialValue = false;
+const initialValue = null;
 
-const authContext = createContext(initialValue);
+const authContext = createContext<authContextType | null>(initialValue);
 
-const AuthProvider = ({ children }: any) => {
-    const [currentUser, setCurrentUser] = useState(initialValue);
+type LocationState = {
+    from: {
+        pathname: string;
+    };
+};
+
+const AuthProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
+    const [currentUser, setCurrentUser] = useState<User | null>(initialValue);
     const [loading, setLoading] = useState(true);
     const navigation = useNavigate();
-    const location: any = useLocation();
-    const from = location.state?.from || "/";
+    const location = useLocation();
+    const locationState = (location.state as LocationState) || "/";
+    const { from } = locationState;
 
     useEffect(() => {
         const auth = getAuth();
-        const unsubsrcibe = auth.onAuthStateChanged((user: any) => {
+        const unsubsrcibe = auth.onAuthStateChanged((user: User | null) => {
             setCurrentUser(user);
             setLoading(false);
         });
@@ -52,7 +60,7 @@ const AuthProvider = ({ children }: any) => {
         }
     };
 
-    const value: any = {
+    const value: authContextType = {
         currentUser,
         setCurrentUser,
         loginHandler,

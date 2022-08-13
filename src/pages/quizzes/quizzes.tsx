@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import "./quizzes.css";
 import { getQuizzes } from "../../services/quiz-services";
 import { useLoader } from "../../context/loader-context";
+import { loaderContextType } from "types/loader.context.types";
 
 function Quizzes() {
     const [quizzes, setQuizzes] = useState([]);
     const { categoryId } = useParams();
-    const { loading, setLoading }: any = useLoader();
+    const { loading, setLoading } = useLoader() as loaderContextType;
 
     useEffect(() => {
         const getData = async () => {

@@ -4,11 +4,13 @@ import "./auth.css";
 import { useAuth } from "../../context/auth-context";
 import { useLoader } from "../../context/loader-context";
 import { LoginCredentialsType } from "types/auth.types";
+import { authContextType } from "types/auth.context.types";
+import { loaderContextType } from "types/loader.context.types";
 
 function Login() {
-    const { loginHandler }: any = useAuth();
+    const { loginHandler } = useAuth() as authContextType;
 
-    const { loading, setLoading }: any = useLoader();
+    const { loading, setLoading } = useLoader() as loaderContextType;
 
     const defaultLoginCredentials = {
         email: "",

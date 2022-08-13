@@ -6,10 +6,11 @@ import { useLoader } from "../../context/loader-context";
 import { getQuestions } from "../../services/question-services";
 import { saveResult } from "../../services/result-services";
 import { QuizQuestion } from "./quiz-question";
+import { loaderContextType } from "types/loader.context.types";
 
 function Quiz() {
     const { quizId } = useParams();
-    const { loading, setLoading }: any = useLoader();
+    const { loading, setLoading } = useLoader() as loaderContextType;
     const [questions, setQuestions] = useState<any[]>([]);
     const [quiz, setQuiz] = useState<any>();
 

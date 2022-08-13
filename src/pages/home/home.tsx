@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import "./home.css";
 import { getCategories } from "../../services/category-services";
 import { useLoader } from "../../context/loader-context";
+import { loaderContextType } from "types/loader.context.types";
 
 function Home() {
     const [categories, setCategories] = useState<any[]>([]);
-    const { setLoading }: any = useLoader();
+    const { setLoading } = useLoader() as loaderContextType;
 
     useEffect(() => {
         const getData = async () => {
