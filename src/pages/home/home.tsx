@@ -4,9 +4,10 @@ import "./home.css";
 import { getCategories } from "../../services/category-services";
 import { useLoader } from "../../context/loader-context";
 import { loaderContextType } from "types/loader.context.types";
+import { categoryType } from "types/category.types";
 
 function Home() {
-    const [categories, setCategories] = useState<any[]>([]);
+    const [categories, setCategories] = useState<categoryType[]>([]);
     const { setLoading } = useLoader() as loaderContextType;
 
     useEffect(() => {
@@ -17,7 +18,7 @@ function Home() {
             setLoading(false);
         };
         getData();
-    }, []);
+    }, [setLoading]);
 
     return (
         <>
@@ -32,7 +33,7 @@ function Home() {
                     >
                         <img
                             src={category.imageUrl}
-                            alt="Image 1"
+                            alt={category.categoryName}
                             className="card-img"
                         />
                         <div className="card-content">

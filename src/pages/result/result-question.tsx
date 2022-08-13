@@ -1,6 +1,14 @@
 import React from "react";
+import { questionType } from "types/quiz.types";
+import { ResultLocationStateType } from "./result";
 
-function ResultQuestion({ state, index }: any) {
+type ResultQuestionPropsType = {
+    state: ResultLocationStateType;
+    index: number;
+    question: questionType;
+};
+
+function ResultQuestion({ state, index }: ResultQuestionPropsType) {
     const { questions, answers } = state ?? {};
     const { selectedAnswers } = answers ?? {};
 
@@ -22,18 +30,18 @@ function ResultQuestion({ state, index }: any) {
             </div>
 
             <div className="options-group">
-                {Options.map((option: any, optionIndex: any) => {
-                    let classname: any = "";
+                {Options.map((option, optionIndex) => {
+                    let className = "";
 
-                    classname = optionIndex == answer && "correct";
+                    className += optionIndex === answer && "correct";
 
-                    if (selectedAnswer == optionIndex) {
-                        classname =
-                            selectedAnswer == answer ? "correct" : "incorrect";
+                    if (selectedAnswer === optionIndex) {
+                        className =
+                            selectedAnswer === answer ? "correct" : "incorrect";
                     }
 
                     return (
-                        <p className={`option ${classname}`} key={option}>
+                        <p className={`option ${className}`} key={option}>
                             {option}
                         </p>
                     );

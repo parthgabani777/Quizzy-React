@@ -1,6 +1,15 @@
 import React from "react";
+import { questionType } from "types/quiz.types";
 
-function QuizQuestion({ question, nextQuestionHandler }: any) {
+type quizQuestionPropsType = {
+    question: questionType;
+    nextQuestionHandler: (optionIndex: number) => void;
+};
+
+function QuizQuestion({
+    question,
+    nextQuestionHandler,
+}: quizQuestionPropsType) {
     const { question: questionText, Options } = question;
     return (
         <>
@@ -10,7 +19,7 @@ function QuizQuestion({ question, nextQuestionHandler }: any) {
             </div>
 
             <div className="options-group">
-                {Options.map((option : any, optionIndex: any) => {
+                {Options.map((option, optionIndex) => {
                     return (
                         <p
                             className="option"

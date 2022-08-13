@@ -16,7 +16,7 @@ type LocationState = {
     };
 };
 
-const AuthProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
+const AuthProvider: React.FC<{ children: JSX.Element[] }> = ({ children }) => {
     const [currentUser, setCurrentUser] = useState<User | null>(initialValue);
     const [loading, setLoading] = useState(true);
     const navigation = useNavigate();

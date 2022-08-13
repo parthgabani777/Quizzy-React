@@ -8,23 +8,30 @@ import {
     getDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { questionType, quizType } from "types/quiz.types";
 
-const getQuestions = async (quizId: any): Promise<any> => {
+export type getQuestionsType = { quiz: quizType; questions: questionType[] };
+
+const getQuestions = async (quizId: string): Promise<getQuestionsType> => {
     try {
         const db = getFirestore();
         const quizDoc = await getDoc(doc(db, `Quizzes/${quizId}`));
-        const quiz = quizDoc.data();
+        const quiz = quizDoc.data() as quizType;
 
         const questionsRef = collection(db, `Quizzes/${quizId}/Questions`);
         const questionsDocs = await getDocs(questionsRef);
 
-        let questions: any[] = [];
+        let questions: questionType[] = [];
         questionsDocs.forEach((question) => {
-            questions.push({ ...question.data(), id: question.id });
+            questions.push({
+                ...question.data(),
+                id: question.id,
+            } as questionType);
         });
         return { quiz, questions };
     } catch (error) {
         toast.error("Can not get questions");
+        throw error;
     }
 };
 

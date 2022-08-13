@@ -7,14 +7,16 @@ import { getQuestions } from "../../services/question-services";
 import { saveResult } from "../../services/result-services";
 import { QuizQuestion } from "./quiz-question";
 import { loaderContextType } from "types/loader.context.types";
+import { questionType, quizType } from "types/quiz.types";
+import { answersType } from "types/result.types";
 
 function Quiz() {
     const { quizId } = useParams();
     const { loading, setLoading } = useLoader() as loaderContextType;
-    const [questions, setQuestions] = useState<any[]>([]);
-    const [quiz, setQuiz] = useState<any>();
+    const [questions, setQuestions] = useState<questionType[]>([]);
+    const [quiz, setQuiz] = useState<quizType>();
 
-    const [answers, setAnswers] = useState<any>({
+    const [answers, setAnswers] = useState<answersType>({
         currentQuestionCounter: 0,
         currentScore: 0,
         selectedAnswers: [],
@@ -24,17 +26,19 @@ function Quiz() {
 
     useEffect(() => {
         const getQuestionsData = async () => {
-            setLoading(true);
-            const { quiz, questions }: any = await getQuestions(quizId);
-            setLoading(false);
-            setQuiz(quiz);
-            setQuestions(questions);
+            if (quizId) {
+                setLoading(true);
+                const { quiz, questions } = await getQuestions(quizId);
+                setLoading(false);
+                setQuiz(quiz);
+                setQuestions(questions);
+            }
         };
 
         getQuestionsData();
-    }, []);
+    }, [quizId, setLoading]);
 
-    const getUpdatedAnswer = (selectedAnswer: any) => {
+    const getUpdatedAnswer = (selectedAnswer: number): answersType => {
         const correctAnswer = questions[answers.currentQuestionCounter].answer;
 
         return selectedAnswer === correctAnswer
@@ -51,7 +55,7 @@ function Quiz() {
               };
     };
 
-    const endQuiz = async (updatedAnswer: any) => {
+    const endQuiz = async (updatedAnswer: answersType) => {
         setLoading(true);
         await saveResult({
             quizId: quizId,
@@ -65,7 +69,7 @@ function Quiz() {
         });
     };
 
-    const nextQuestionHandler = async (selectedAnswer: any) => {
+    const nextQuestionHandler = async (selectedAnswer: number) => {
         const updatedAnswer = getUpdatedAnswer(selectedAnswer);
 
         if (answers.currentQuestionCounter < questions.length - 1) {

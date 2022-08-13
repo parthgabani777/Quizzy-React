@@ -3,11 +3,18 @@ import "../../css/questions.css";
 import { useLocation } from "react-router";
 import React from "react";
 import { ResultQuestion } from "./result-question";
+import { questionType } from "types/quiz.types";
+import { answersType } from "types/result.types";
+
+export type ResultLocationStateType = {
+    questions: questionType[];
+    answers: answersType;
+};
 
 const Result = () => {
     const { state } = useLocation();
 
-    const { questions, answers }: any = state ?? {};
+    const { questions, answers } = (state as ResultLocationStateType) ?? {};
     const { currentScore } = answers ?? {};
 
     return (
@@ -22,9 +29,9 @@ const Result = () => {
                         Final Score: {currentScore} / {questions.length}
                     </div>
                     <div className="question-list">
-                        {questions.map((question: any, index: any) => (
+                        {questions.map((question, index) => (
                             <ResultQuestion
-                                state={state}
+                                state={state as ResultLocationStateType}
                                 index={index}
                                 question={question}
                                 key={index}
