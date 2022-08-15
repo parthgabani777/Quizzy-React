@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { Navigate, useLocation } from "react-router";
 import { toast } from "react-toastify";
+import { authContextType } from "types/auth.context.types";
 import { useAuth } from "../context/auth-context";
 
-const RequiresAuth = ({ children }: any) => {
-    const { currentUser }: any = useAuth();
+const RequiresAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
+    const { currentUser } = useAuth() as authContextType;
     const location = useLocation();
 
     useEffect(() => {
@@ -12,7 +13,7 @@ const RequiresAuth = ({ children }: any) => {
             toast.dismiss();
             toast.error("Login first.");
         }
-    }, []);
+    }, [currentUser]);
 
     return currentUser ? (
         children

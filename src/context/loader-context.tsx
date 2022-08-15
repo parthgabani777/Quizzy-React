@@ -1,4 +1,9 @@
-import React, { createContext, useContext, useState } from "react";
+import React, {
+    createContext,
+    CSSProperties,
+    useContext,
+    useState,
+} from "react";
 import { ClipLoader } from "react-spinners";
 import { loaderContextType } from "types/loader.context.types";
 
@@ -9,7 +14,7 @@ const LoaderProvider: React.FC<{ children: JSX.Element }> = ({
 }: any) => {
     const [loading, setLoading] = useState(false);
 
-    const loaderStyle: any = {
+    const loaderStyle: CSSProperties = {
         position: "absolute",
         top: "50%",
         left: "50%",
@@ -21,7 +26,7 @@ const LoaderProvider: React.FC<{ children: JSX.Element }> = ({
         <LoaderContext.Provider value={value}>
             <ClipLoader
                 loading={loading}
-                css={loaderStyle}
+                cssOverride={loaderStyle}
                 color="white"
                 size="75px"
             />
