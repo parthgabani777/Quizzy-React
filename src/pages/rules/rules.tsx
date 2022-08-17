@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { loaderContextType } from "types/loader.context.types";
-import { quizType } from "types/quiz.types";
+import { LoaderContextType } from "types/loader.context.types";
+import { QuizType } from "types/quiz.types";
 import { useLoader } from "../../context/loader-context";
 import { getQuiz } from "../../services/quiz-services";
 import "./rules.css";
 
 function Rules() {
     const { quizId } = useParams();
-    const { loading, setLoading } = useLoader() as loaderContextType;
-    const [quiz, setQuiz] = useState<quizType>();
+    const { loading, setLoading } = useLoader() as LoaderContextType;
+    const [quiz, setQuiz] = useState<QuizType>();
     const { id, title, totalQuestions, totalTime } = quiz || {};
 
     useEffect(() => {

@@ -1,11 +1,11 @@
-export type questionType = {
+export type QuestionType = {
     id?: string | null;
     question: string;
     Options: string[];
     answer: number;
 };
 
-export type quizType = {
+export type QuizType = {
     id?: string | null;
     categoryId: string;
     categoryName: string;
@@ -13,5 +13,5 @@ export type quizType = {
     imageUrl: string;
     totalQuestions: number;
     totalTime: number;
-    Questions: questionType[];
+    Questions: QuestionType[];
 };

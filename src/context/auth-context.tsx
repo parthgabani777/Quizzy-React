@@ -4,11 +4,11 @@ import { useLocation, useNavigate } from "react-router";
 import { login, signup, signout } from "../services/auth-services";
 import { toast } from "react-toastify";
 import { LoginCredentialsType, SignupCredentialsType } from "types/auth.types";
-import { authContextType } from "../types/auth.context.types";
+import { AuthContextType } from "../types/auth.context.types";
 
 const initialValue = null;
 
-const authContext = createContext<authContextType | null>(initialValue);
+const authContext = createContext<AuthContextType | null>(initialValue);
 
 type LocationState = {
     from: {
@@ -60,7 +60,7 @@ const AuthProvider: React.FC<{ children: JSX.Element[] }> = ({ children }) => {
         }
     };
 
-    const value: authContextType = {
+    const value: AuthContextType = {
         currentUser,
         setCurrentUser,
         loginHandler,

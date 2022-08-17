@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { Navigate, useLocation } from "react-router";
 import { toast } from "react-toastify";
-import { authContextType } from "types/auth.context.types";
+import { AuthContextType } from "types/auth.context.types";
 import { useAuth } from "../context/auth-context";
 
 const RequiresAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
-    const { currentUser } = useAuth() as authContextType;
+    const { currentUser } = useAuth() as AuthContextType;
     const location = useLocation();
 
     useEffect(() => {

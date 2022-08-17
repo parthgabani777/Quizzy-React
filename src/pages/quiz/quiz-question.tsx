@@ -1,15 +1,15 @@
 import React from "react";
-import { questionType } from "types/quiz.types";
+import { QuestionType } from "types/quiz.types";
 
-type quizQuestionPropsType = {
-    question: questionType;
+type QuizQuestionPropsType = {
+    question: QuestionType;
     nextQuestionHandler: (optionIndex: number) => void;
 };
 
 function QuizQuestion({
     question,
     nextQuestionHandler,
-}: quizQuestionPropsType) {
+}: QuizQuestionPropsType) {
     const { question: questionText, Options } = question;
     return (
         <>

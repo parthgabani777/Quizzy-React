@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import "./home.css";
 import { getCategories } from "../../services/category-services";
 import { useLoader } from "../../context/loader-context";
-import { loaderContextType } from "types/loader.context.types";
-import { categoryType } from "types/category.types";
+import { LoaderContextType } from "types/loader.context.types";
+import { CategoryType } from "types/category.types";
 
 function Home() {
-    const [categories, setCategories] = useState<categoryType[]>([]);
-    const { setLoading } = useLoader() as loaderContextType;
+    const [categories, setCategories] = useState<CategoryType[]>([]);
+    const { setLoading } = useLoader() as LoaderContextType;
 
     useEffect(() => {
         const getData = async () => {

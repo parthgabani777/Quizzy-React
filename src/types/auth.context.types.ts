@@ -2,7 +2,7 @@ import { User } from "firebase/auth";
 import { LoginCredentialsType, SignupCredentialsType } from "./auth.types";
 import React from "react";
 
-export type authContextType = {
+export type AuthContextType = {
     currentUser: User | null;
     setCurrentUser: React.Dispatch<React.SetStateAction<User | null>>;
     loginHandler: (loginCredentialsType: LoginCredentialsType) => Promise<void>;

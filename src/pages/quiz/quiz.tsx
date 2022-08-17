@@ -6,17 +6,36 @@ import { useLoader } from "../../context/loader-context";
 import { getQuestions } from "../../services/question-services";
 import { saveResult } from "../../services/result-services";
 import { QuizQuestion } from "./quiz-question";
-import { loaderContextType } from "types/loader.context.types";
-import { questionType, quizType } from "types/quiz.types";
-import { answersType } from "types/result.types";
+import { LoaderContextType } from "types/loader.context.types";
+import { QuestionType, QuizType } from "types/quiz.types";
+import { AnswersType, ResultType } from "types/result.types";
+
+export const getUpdatedAnswer = (
+    selectedAnswer: number,
+    correctAnswer: number,
+    answers: AnswersType
+): AnswersType => {
+    return selectedAnswer === correctAnswer
+        ? {
+              ...answers,
+              currentQuestionCounter: answers.currentQuestionCounter + 1,
+              currentScore: answers.currentScore + 1,
+              selectedAnswers: [...answers.selectedAnswers, selectedAnswer],
+          }
+        : {
+              ...answers,
+              currentQuestionCounter: answers.currentQuestionCounter + 1,
+              selectedAnswers: [...answers.selectedAnswers, selectedAnswer],
+          };
+};
 
 function Quiz() {
     const { quizId } = useParams();
-    const { loading, setLoading } = useLoader() as loaderContextType;
-    const [questions, setQuestions] = useState<questionType[]>([]);
-    const [quiz, setQuiz] = useState<quizType>();
+    const { loading, setLoading } = useLoader() as LoaderContextType;
+    const [questions, setQuestions] = useState<QuestionType[]>([]);
+    const [quiz, setQuiz] = useState<QuizType>();
 
-    const [answers, setAnswers] = useState<answersType>({
+    const [answers, setAnswers] = useState<AnswersType>({
         currentQuestionCounter: 0,
         currentScore: 0,
         selectedAnswers: [],
@@ -38,39 +57,29 @@ function Quiz() {
         getQuestionsData();
     }, [quizId, setLoading]);
 
-    const getUpdatedAnswer = (selectedAnswer: number): answersType => {
-        const correctAnswer = questions[answers.currentQuestionCounter].answer;
-
-        return selectedAnswer === correctAnswer
-            ? {
-                  ...answers,
-                  currentQuestionCounter: answers.currentQuestionCounter + 1,
-                  currentScore: answers.currentScore + 1,
-                  selectedAnswers: [...answers.selectedAnswers, selectedAnswer],
-              }
-            : {
-                  ...answers,
-                  currentQuestionCounter: answers.currentQuestionCounter + 1,
-                  selectedAnswers: [...answers.selectedAnswers, selectedAnswer],
-              };
-    };
-
-    const endQuiz = async (updatedAnswer: answersType) => {
-        setLoading(true);
-        await saveResult({
-            quizId: quizId,
-            quizTitle: quiz?.title,
-            score: answers.currentScore,
-            totalScore: quiz?.totalQuestions,
-        });
-        setLoading(false);
-        navigation("/result", {
-            state: { questions, answers: updatedAnswer },
-        });
+    const endQuiz = async (updatedAnswer: AnswersType) => {
+        if (quizId && quiz) {
+            setLoading(true);
+            await saveResult({
+                quizId: quizId,
+                quizTitle: quiz.title,
+                score: answers.currentScore,
+                totalScore: quiz.totalQuestions,
+            });
+            setLoading(false);
+            navigation("/result", {
+                state: { questions, answers: updatedAnswer },
+            });
+        }
     };
 
     const nextQuestionHandler = async (selectedAnswer: number) => {
-        const updatedAnswer = getUpdatedAnswer(selectedAnswer);
+        const correctAnswer = questions[answers.currentQuestionCounter].answer;
+        const updatedAnswer = getUpdatedAnswer(
+            selectedAnswer,
+            correctAnswer,
+            answers
+        );
 
         if (answers.currentQuestionCounter < questions.length - 1) {
             return setAnswers(updatedAnswer);

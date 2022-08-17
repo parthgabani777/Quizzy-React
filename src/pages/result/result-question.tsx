@@ -1,11 +1,11 @@
 import React from "react";
-import { questionType } from "types/quiz.types";
+import { QuestionType } from "types/quiz.types";
 import { ResultLocationStateType } from "./result";
 
 type ResultQuestionPropsType = {
     state: ResultLocationStateType;
     index: number;
-    question: questionType;
+    question: QuestionType;
 };
 
 function ResultQuestion({ state, index }: ResultQuestionPropsType) {

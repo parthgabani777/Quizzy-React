@@ -8,9 +8,9 @@ import {
     getDoc,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { quizType } from "types/quiz.types";
+import { QuizType } from "types/quiz.types";
 
-const getQuizzes = async (categoryId: string): Promise<quizType[]> => {
+const getQuizzes = async (categoryId: string): Promise<QuizType[]> => {
     try {
         const db = getFirestore();
 
@@ -19,9 +19,9 @@ const getQuizzes = async (categoryId: string): Promise<quizType[]> => {
             where("categoryId", "==", categoryId)
         );
         const quizzesDocs = await getDocs(q);
-        let quizzes: quizType[] = [];
+        let quizzes: QuizType[] = [];
         quizzesDocs.forEach((quiz) =>
-            quizzes.push({ ...quiz.data(), id: quiz.id } as quizType)
+            quizzes.push({ ...quiz.data(), id: quiz.id } as QuizType)
         );
         return quizzes;
     } catch (error) {
@@ -30,14 +30,14 @@ const getQuizzes = async (categoryId: string): Promise<quizType[]> => {
     }
 };
 
-const getQuiz = async (quizId: string): Promise<quizType | null> => {
+const getQuiz = async (quizId: string): Promise<QuizType | null> => {
     try {
         const db = getFirestore();
         const quizRef = doc(db, `Quizzes/${quizId}`);
         const quizDoc = await getDoc(quizRef);
 
         return quizDoc.exists()
-            ? ({ ...quizDoc.data(), id: quizDoc.id } as quizType)
+            ? ({ ...quizDoc.data(), id: quizDoc.id } as QuizType)
             : null;
     } catch (error) {
         toast.error("Can not get quiz data.");

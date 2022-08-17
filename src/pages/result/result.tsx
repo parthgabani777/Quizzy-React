@@ -3,12 +3,12 @@ import "../../css/questions.css";
 import { useLocation } from "react-router";
 import React from "react";
 import { ResultQuestion } from "./result-question";
-import { questionType } from "types/quiz.types";
-import { answersType } from "types/result.types";
+import { QuestionType } from "types/quiz.types";
+import { AnswersType } from "types/result.types";
 
 export type ResultLocationStateType = {
-    questions: questionType[];
-    answers: answersType;
+    questions: QuestionType[];
+    answers: AnswersType;
 };
 
 const Result = () => {

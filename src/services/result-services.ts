@@ -3,13 +3,14 @@
 import { getAuth } from "firebase/auth";
 import { addDoc, collection, getFirestore } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { ResultType } from "types/result.types";
 
 const saveResult = async ({
     quizId,
-    quizTitle = "temp",
+    quizTitle,
     score,
     totalScore,
-}: any) => {
+}: ResultType) => {
     const { currentUser } = getAuth();
     const db = getFirestore();
     try {

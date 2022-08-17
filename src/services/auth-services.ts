@@ -6,7 +6,11 @@ import {
 } from "firebase/auth";
 import { doc, getFirestore, setDoc, getDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { LoginCredentialsType, SignupCredentialsType } from "types/auth.types";
+import {
+    LoginCredentialsType,
+    SignupCredentialsType,
+    UserDataType,
+} from "types/auth.types";
 
 const signup = async ({
     email,
@@ -43,7 +47,7 @@ const signout = async () => {
     await signOut(auth);
 };
 
-const getUserData = async (): Promise<any> => {
+const getUserData = async (): Promise<UserDataType | undefined> => {
     try {
         const { currentUser } = getAuth();
         if (!currentUser) {
@@ -52,10 +56,13 @@ const getUserData = async (): Promise<any> => {
         const uid = currentUser.uid;
 
         const db = getFirestore();
-        const userData = await getDoc(doc(db, `Users/${uid}`));
+        const userData = (await (
+            await getDoc(doc(db, `Users/${uid}`))
+        ).data()) as UserDataType;
         return userData;
     } catch (error) {
         toast.error("Can get user data");
+        throw error;
     }
 };
 

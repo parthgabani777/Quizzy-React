@@ -1,14 +1,14 @@
 import { getFirestore, getDocs, collection } from "firebase/firestore";
 import { toast } from "react-toastify";
-import { categoryType } from "types/category.types";
+import { CategoryType } from "types/category.types";
 
-const getCategories = async (): Promise<categoryType[]> => {
+const getCategories = async (): Promise<CategoryType[]> => {
     try {
         const db = getFirestore();
         const categoriesDocs = await getDocs(collection(db, "Categories"));
-        let categories: categoryType[] = [];
+        let categories: CategoryType[] = [];
         categoriesDocs.forEach((doc) =>
-            categories.push({ ...doc.data(), id: doc.id } as categoryType)
+            categories.push({ ...doc.data(), id: doc.id } as CategoryType)
         );
         return categories;
     } catch (error) {

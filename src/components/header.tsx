@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { AuthContextType } from "types/auth.context.types";
 import { useAuth } from "../context/auth-context";
 import "../css/header.css";
 
 function Header() {
-    const { currentUser, signoutHandler }: any = useAuth();
+    const { currentUser, signoutHandler } = useAuth() as AuthContextType;
 
     const signout = async () => {
         await signoutHandler();

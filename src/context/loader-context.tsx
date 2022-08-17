@@ -5,13 +5,11 @@ import React, {
     useState,
 } from "react";
 import { ClipLoader } from "react-spinners";
-import { loaderContextType } from "types/loader.context.types";
+import { LoaderContextType } from "types/loader.context.types";
 
-const LoaderContext = createContext<loaderContextType | boolean>(false);
+const LoaderContext = createContext<LoaderContextType | boolean>(false);
 
-const LoaderProvider: React.FC<{ children: JSX.Element }> = ({
-    children,
-}: any) => {
+const LoaderProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
     const [loading, setLoading] = useState(false);
 
     const loaderStyle: CSSProperties = {
@@ -20,7 +18,7 @@ const LoaderProvider: React.FC<{ children: JSX.Element }> = ({
         left: "50%",
     };
 
-    const value: loaderContextType = { loading, setLoading };
+    const value: LoaderContextType = { loading, setLoading };
 
     return (
         <LoaderContext.Provider value={value}>
