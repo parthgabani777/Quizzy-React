@@ -8,7 +8,7 @@ import { saveResult } from "../../services/result-services";
 import { QuizQuestion } from "./quiz-question";
 import { LoaderContextType } from "types/loader.context.types";
 import { QuestionType, QuizType } from "types/quiz.types";
-import { AnswersType, ResultType } from "types/result.types";
+import { AnswersType } from "types/result.types";
 
 export const getUpdatedAnswer = (
     selectedAnswer: number,
